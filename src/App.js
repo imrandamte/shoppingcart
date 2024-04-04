@@ -3,29 +3,30 @@ import CategoryBox from './components/CategoryBox';
 import data from './data/products.json';
 import './App.css';
 
+const App = () => {
+  const [cart, setCart] = useState([]);
 
-const App=()=> {
-const [cart,setCart]=useState([]);
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+  };
 
-const addToCart=(product) =>{
-  setCart([...cart,product]);
-};
-const removeFromCart=(productToRemove) =>{
-  const updatedCart =cart.filter(product => product !== productToRemove);
-  setCart(updatedCart);
-};
+  const removeFromCart = (productToRemove) => {
+    const updatedCart = cart.filter(product => product !== productToRemove);
+    setCart(updatedCart);
+  };
 
   return (
-
     <div className="app">
-
-    {data.data.map((category, index) => (
-      <CategoryBox key={index} category={category} 
-      onAddToCart={addToCart} onRemoveFromCart={removeFromCart} />
-
-    ))}
-    
-   </div>
+      {data.data.map((category, index) => (
+        <CategoryBox
+          key={index}
+          category={category}
+          cart={cart}
+          onAddToCart={addToCart}
+          onRemoveFromCart={removeFromCart}
+        />
+      ))}
+    </div>
   );
 }
 

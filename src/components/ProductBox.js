@@ -1,42 +1,35 @@
-// ProductBox.js
 import React, { useState } from 'react';
 import CartButton from './CartButton';
 
+const ProductBox = ({ product, cart, onAddToCart, onRemoveFromCart }) => {
+  const [isInCart, setIsInCart] = useState(false);
 
-
-
-const ProductBox = ({ product,onAddToCart,onRemoveFromCart }) => {
-    const [isInCart,setIsInCart]=useState(false);
   const handleAddToCart = () => {
-    
-     onAddToCart=(product) 
-        setIsInCart(true);  
-    
-    
+    setIsInCart(true);
+    onAddToCart(product);
     console.log('Product Added to the cart');
-    console.log('List of products present in cartarray',product);
-    alert(" Product added to cart" )
+    console.log('List of products present in cartarray', cart);
+    alert("Product added to cart");
   };
 
   const handleRemoveFromCart = () => {
-    //okay
-   onRemoveFromCart=(product);
-   setIsInCart(false);
-   console.log('Product Removed from the cart');
-   console.log('List of products present in cartarray',product);
-
-    alert(" Product removed from the cart" ,product);
+    setIsInCart(false);
+    onRemoveFromCart(product);
+    console.log('Product Removed from the cart');
+    console.log('List of products present in cartarray', cart);
+    alert("Product removed from the cart");
   };
 
   return (
     <div className="product-box">
-       
       <h3>{product.name}</h3>
       <p>Price: ${product.price}</p>
-      <CartButton isInCart={isInCart} onAddToCart={handleAddToCart} onRemoveFromCart={handleRemoveFromCart} />
-      
+      <CartButton
+        isInCart={isInCart}
+        onAddToCart={handleAddToCart}
+        onRemoveFromCart={handleRemoveFromCart}
+      />
     </div>
-
   );
 };
 
